@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Calculator</title>
+    <style>
+      body {
+        display: flex;
+        align-self: center;
+        flex-direction: column;
+        font-family: "Dosis", Helvetica, Arial, sans-serif;
+        font-weight: 600;
+        background-color: #001f3f;
+      }
+
+      .containerCalc {
+        display: grid;
+        align-self: center;
+        align-content: center;
+        width: 400px;
+        height: 500px;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 0.5fr 2fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-areas:
+          "mathrep mathrep mathrep mathrep"
+          "mathdata mathdata mathdata mathdata"
+          "clear plus moins erase"
+          "one two three multiply"
+          "four five six divise"
+          "seven eight nine dot"
+          "zewo egale egale egale";
+        border: 5px solid #ffdc00;
+        background: #ffdc00;
+      }
+      .mathrep {
+        grid-area: mathrep;
+        background: #111111;
+        color: #7fdbff;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        font-size: 20px;
+        max-width: 400px;
+        padding-right: 5px;
+      }
+      .mathdata {
+        grid-area: mathdata;
+        background: #ffffff;
+        border: 2px solid #111111;
+        font-size: 40px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        max-width: 396px;
+      }
+      .egale {
+        grid-area: egale;
+      }
+      .btns {
+        width: 100%;
+        height: 100%;
+        font-size: 20px;
+        border: 2px solid #f012be;
+        background: #dddddd;
+        transition-duration: 0.4s;
+      }
+      .btns:hover {
+        background-color: #ffdc00;
+        border: 3px solid #111111;
+      }
+      .erasemore {
+        grid-area: clear;
+      }
+      .erase1 {
+        grid-area: erase;
+      }
+      .nb0 {
+        grid-area: zewo;
+      }
+      .nb1 {
+        grid-area: one;
+      }
+      .nb2 {
+        grid-area: two;
+      }
+      .nb3 {
+        grid-area: three;
+      }
+      .nb4 {
+        grid-area: four;
+      }
+      .nb5 {
+        grid-area: five;
+      }
+      .nb6 {
+        grid-area: six;
+      }
+      .nb7 {
+        grid-area: seven;
+      }
+      .nb8 {
+        grid-area: eight;
+      }
+      .nb9 {
+        grid-area: nine;
+      }
+      .plus {
+        grid-area: plus;
+      }
+      .moins {
+        grid-area: moins;
+      }
+      .multiply {
+        grid-area: multiply;
+      }
+      .divise {
+        grid-area: divise;
+      }
+      .dot {
+        grid-area: dot;
+      }
+      h1 {
+        text-transform: uppercase;
+        color: white;
+        font-size: 6em;
+        text-align: center;
+        animation: neonGlow 2s infinite alternate
+          cubic-bezier(0.455, 0.03, 0.515, 0.955);
+      }
+      @keyframes neonGlow {
+        0% {
+          text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+            0 0 20px rgba(255, 255, 255, 0.8), 0 0 22px rgba(255, 255, 255, 0.8),
+            0 0 40px rgba(66, 220, 219, 0.8), 0 0 60px rgba(66, 220, 219, 0.8),
+            0 0 80px rgba(66, 220, 219, 0.5), 0 0 100px rgba(66, 220, 219, 0.5),
+            0 0 140px rgba(66, 220, 219, 0.5), 0 0 200px rgba(66, 220, 219, 0.5);
+        }
+        100% {
+          text-shadow: 0 0 2px rgba(255, 255, 255, 0.8),
+            0 0 8px rgba(255, 255, 255, 0.8), 0 0 10px rgba(255, 255, 255, 0.8),
+            0 0 20px rgba(66, 220, 219, 0.8), 0 0 30px rgba(66, 220, 219, 0.8),
+            0 0 40px rgba(66, 220, 219, 0.8), 0 0 50px rgba(66, 220, 219, 0.5),
+            0 0 80px rgba(66, 220, 219, 0.5);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <link
+      href="https://fonts.googleapis.com/css?family=Dosis:600"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <h1>OUANLING'S CALCULATOR</h1>
+    <div class="containerCalc">
+      <div class="calcDisplay mathdata"></div>
+      <div class="calcDisplay mathrep"></div>
+
+      <div class="nb0"><input type="button" value="0" class="btns disp" /></div>
+      <div class="nb1"><input type="button" value="1" class="btns disp" /></div>
+      <div class="nb2"><input type="button" value="2" class="btns disp" /></div>
+      <div class="nb3"><input type="button" value="3" class="btns disp" /></div>
+      <div class="nb4"><input type="button" value="4" class="btns disp" /></div>
+      <div class="nb5"><input type="button" value="5" class="btns disp" /></div>
+      <div class="nb6"><input type="button" value="6" class="btns disp" /></div>
+      <div class="nb7"><input type="button" value="7" class="btns disp" /></div>
+      <div class="nb8"><input type="button" value="8" class="btns disp" /></div>
+      <div class="nb9"><input type="button" value="9" class="btns disp" /></div>
+      <div class="dot"><input type="button" value="." class="btns disp" /></div>
+
+      <div class="erase1"><input type="button" value="del" class="btns" /></div>
+      <div class="erasemore">
+        <input type="button" value="clear" class="btns" />
+      </div>
+      <div class="plus">
+        <input type="button" value="+" class="btns disp signs" />
+      </div>
+      <div class="moins">
+        <input type="button" value="-" class="btns disp signs" />
+      </div>
+      <div class="multiply">
+        <input type="button" value="x" class="btns disp signs" />
+      </div>
+      <div class="divise">
+        <input type="button" value="÷" class="btns disp signs" />
+      </div>
+      <div class="egale"><input type="button" value="=" class="btns" /></div>
+    </div>
+    <script>
+      function operate(numb1, numb2, operator) {
+        switch (operator) {
+          case "plus":
+            return numb1 + numb2;
+          case "moins":
+            return numb1 - numb2;
+          case "multiply":
+            return numb1 * numb2;
+          case "divide":
+            return numb1 / numb2;
+        }
+      }
+      const objClicked = {firstNumber: '0', sign: '', secondNumber: '0',};
+      var signclicked = false;
+      var audeux = false;
+      const dispbtns = document.querySelectorAll(".disp");
+      const signbtns = document.querySelectorAll(".signs");
+      const repDisplay = document.querySelector(".mathrep");
+      const mathdatadisplay = document.querySelector(".mathdata");
+      const egalebtn = document.querySelector('.egale'); 
+      var endreponse = "";
+
+      egalebtn.addEventListener("click", function() { if (!signclicked) { console.log('pas de sign'); } else {
+          console.log('egale click');
+          nu1 = Number(objClicked.firstNumber);
+          nu2 = Number(objClicked.secondNumber);
+          si = objClicked.sign;
+          endreponse = operate(nu1, nu2, si);
+          repDisplay.innerHTML = endreponse;
+          clearObj();
+        } });
+      
+      signbtns.forEach(al => al.addEventListener("click", function() { if (signclicked) { alert('Cant do math with 2 signs next to each other'); } else {  }}))
+      dispbtns.forEach(el =>
+        el.addEventListener("click", function() {
+          if (objClicked.firstNumber.length >= 12 && (!isNaN(this.value)) && (!audeux)) {
+            alert("too long");}
+            else if (isNaN(this.value) && (signclicked == true)) { console.log('sign deja clicke');}
+            else if (isNaN(this.value) && (signclicked == false)) { signclicked = true ; audeux = true; mathdatadisplay.insertAdjacentHTML("beforeend", this.value + " "); createEq(this.value);   }
+            else {
+          mathdatadisplay.insertAdjacentHTML("beforeend", this.value + " ");
+          createEq(this.value); } } ));
+        
+
+function createEq(e) {
+   if (!signclicked) { objClicked.firstNumber = (Number(objClicked.firstNumber) + e); console.log(objClicked.firstNumber); }
+   else if (isNaN(e)) { addSign(e);}
+   else { objClicked.secondNumber = (Number(objClicked.secondNumber) + e); console.log(objClicked.secondNumber); }
+}
+function addSign(z) {
+    
+    switch (z) {
+        case "+":
+             objClicked.sign = 'plus';
+             break;
+        case "-":
+             objClicked.sign = 'moins';
+             break;
+        case "x":
+             objClicked.sign = 'multiply';
+             break;
+        case "÷":
+             objClicked.sign = 'divide';
+             break;
+    }
+         
+}
+function clearObj() {
+    mathdatadisplay.insertAdjacentHTML("beforeend", " = " + endreponse + " ");
+    objClicked.sign = "";
+    objClicked.firstNumber = Number(endreponse);
+    objClicked.secondNumber = "0";
+    signclicked = false;
+}
+    </script>
+  </body>
+</html>
