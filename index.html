@@ -220,13 +220,14 @@
       erasebtn.addEventListener("click", sliceOne);
 
       dot.addEventListener("click", function() {
-                    if ((dotclicked == false) && (!signclicked)) {
+                    if (dotclicked == false) {
                       dotclicked = true;
+                      dotdone = false;
                       mathdatadisplay.insertAdjacentHTML("beforeend", '.'+ " ")
                     }
                     else if (dotclicked == true) { alert ('already clicked the dot there bruh') ;}
                     
-                    else { alert('ERROR');}
+                    
 
 
       } )
@@ -296,12 +297,20 @@
         }
         else if (isNaN(e)) {
           addSign(e);
-        } else {
+        } else if ((signclicked) && (!dotclicked)){
           objClicked.secondNumber = Number(objClicked.secondNumber) + e;
           console.log(objClicked.secondNumber);
         }
+        else if ((signclicked) && (dotclicked) && (!dotdone)) {
+          objClicked.secondNumber = objClicked.secondNumber + '.' + e;
+          dotdone = true;
+        }
+        else if ((!signclicked) && (dotclicked = true) && (donedone)) {
+          objClicked.secondNumber = objClicked.secondNumber + e; }
       }
       function addSign(z) {
+        dotclicked = false;
+        dotdone = false;
         switch (z) {
           case "+":
             objClicked.sign = "plus";
@@ -337,6 +346,7 @@
         audeux = false;
         signclicked = false;
         endreponse = "";
+        dotclicked = false;
       }
       function sliceOne() {
         if (signclicked && objClicked.secondNumber <= 0) {
