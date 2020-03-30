@@ -171,7 +171,7 @@
 
       <div class="erase1"><input type="button" value="del" class="btns" /></div>
       <div class="erasemore">
-        <input type="button" value="clear" class="btns" />
+        <input type="button" value="clear" class="btns erasemore" />
       </div>
       <div class="plus">
         <input type="button" value="+" class="btns disp signs" />
@@ -200,69 +200,117 @@
             return numb1 / numb2;
         }
       }
-      const objClicked = {firstNumber: '0', sign: '', secondNumber: '0',};
+      const objClicked = { firstNumber: "", sign: "", secondNumber: "" };
       var signclicked = false;
       var audeux = false;
       const dispbtns = document.querySelectorAll(".disp");
       const signbtns = document.querySelectorAll(".signs");
       const repDisplay = document.querySelector(".mathrep");
       const mathdatadisplay = document.querySelector(".mathdata");
-      const egalebtn = document.querySelector('.egale'); 
+      const egalebtn = document.querySelector(".egale");
       var endreponse = "";
+      const clearbtn = document.querySelector(".erasemore");
 
-      egalebtn.addEventListener("click", function() { if (!signclicked) { console.log('pas de sign'); } else {
-          console.log('egale click');
+      clearbtn.addEventListener("click", clearDisp);
+
+      egalebtn.addEventListener("click", function() {
+        if (!signclicked) {
+          console.log("pas de sign");
+        } else {
+          console.log("egale click");
           nu1 = Number(objClicked.firstNumber);
           nu2 = Number(objClicked.secondNumber);
           si = objClicked.sign;
           endreponse = operate(nu1, nu2, si);
           repDisplay.innerHTML = endreponse;
           clearObj();
-        } });
-      
-      signbtns.forEach(al => al.addEventListener("click", function() { if (signclicked) { alert('Cant do math with 2 signs next to each other'); } else {  }}))
+        }
+      });
+
+      signbtns.forEach(al =>
+        al.addEventListener("click", function() {
+          if (signclicked) {
+            alert("Cant do math with 2 signs next to each other");
+          } else {
+          }
+        })
+      );
       dispbtns.forEach(el =>
         el.addEventListener("click", function() {
-          if (objClicked.firstNumber.length >= 12 && (!isNaN(this.value)) && (!audeux)) {
-            alert("too long");}
-            else if((audeux) && objClicked.secondNumber.length >=11 && (!isNaN(this.value))) { alert('too long');}
-            else if (isNaN(this.value) && (signclicked == true)) { console.log('sign deja clicke');}
-            else if (isNaN(this.value) && (signclicked == false)) { signclicked = true ; audeux = true; mathdatadisplay.insertAdjacentHTML("beforeend", this.value + " "); createEq(this.value);   }
-            else {
-          mathdatadisplay.insertAdjacentHTML("beforeend", this.value + " ");
-          createEq(this.value); } } ));
-        
+          if (
+            objClicked.firstNumber.length >= 12 &&
+            !isNaN(this.value) &&
+            !audeux
+          ) {
+            alert("too long");
+          } else if (
+            audeux &&
+            objClicked.secondNumber.length >= 11 &&
+            !isNaN(this.value)
+          ) {
+            alert("too long");
+          } else if (isNaN(this.value) && signclicked == true) {
+            console.log("sign deja clicke");
+          } else if (isNaN(this.value) && signclicked == false) {
+            signclicked = true;
+            audeux = true;
+            mathdatadisplay.insertAdjacentHTML("beforeend", this.value + " ");
+            createEq(this.value);
+          } else {
+            mathdatadisplay.insertAdjacentHTML("beforeend", this.value + " ");
+            createEq(this.value);
+          }
+        })
+      );
 
-function createEq(e) {
-   if (!signclicked) { objClicked.firstNumber = (Number(objClicked.firstNumber) + e); console.log(objClicked.firstNumber); }
-   else if (isNaN(e)) { addSign(e);}
-   else { objClicked.secondNumber = (Number(objClicked.secondNumber) + e); console.log(objClicked.secondNumber); }
-}
-function addSign(z) {
-    
-    switch (z) {
-        case "+":
-             objClicked.sign = 'plus';
-             break;
-        case "-":
-             objClicked.sign = 'moins';
-             break;
-        case "x":
-             objClicked.sign = 'multiply';
-             break;
-        case "÷":
-             objClicked.sign = 'divide';
-             break;
-    }
-         
-}
-function clearObj() {
-    mathdatadisplay.insertAdjacentHTML("beforeend", " = " + endreponse + " ");
-    objClicked.sign = "";
-    objClicked.firstNumber = Number(endreponse);
-    objClicked.secondNumber = "0";
-    signclicked = false;
-}
+      function createEq(e) {
+        if (!signclicked) {
+          objClicked.firstNumber = Number(objClicked.firstNumber) + e;
+          console.log(objClicked.firstNumber);
+        } else if (isNaN(e)) {
+          addSign(e);
+        } else {
+          objClicked.secondNumber = Number(objClicked.secondNumber) + e;
+          console.log(objClicked.secondNumber);
+        }
+      }
+      function addSign(z) {
+        switch (z) {
+          case "+":
+            objClicked.sign = "plus";
+            break;
+          case "-":
+            objClicked.sign = "moins";
+            break;
+          case "x":
+            objClicked.sign = "multiply";
+            break;
+          case "÷":
+            objClicked.sign = "divide";
+            break;
+        }
+      }
+      function clearObj() {
+        mathdatadisplay.insertAdjacentHTML(
+          "beforeend",
+          " = " + endreponse + " "
+        );
+        objClicked.sign = "";
+        objClicked.firstNumber = Number(endreponse);
+        objClicked.secondNumber = "";
+        signclicked = false;
+      }
+
+      function clearDisp() {
+        mathdatadisplay.innerHTML = ''
+        repDisplay.innerHTML = '';
+        objClicked.sign = '';
+        objClicked.firstNumber = '';
+        objClicked.secondNumber = '';
+        audeux = false;
+        signclicked = false;
+        endreponse = '';
+      }
     </script>
   </body>
 </html>
