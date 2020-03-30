@@ -167,7 +167,7 @@
       <div class="nb7"><input type="button" value="7" class="btns disp" /></div>
       <div class="nb8"><input type="button" value="8" class="btns disp" /></div>
       <div class="nb9"><input type="button" value="9" class="btns disp" /></div>
-      <div class="dot"><input type="button" value="." class="btns disp" /></div>
+      <div class="dot"><input type="button" value="." class="btns dot" /></div>
 
       <div class="erase1"><input type="button" value="del" class="btns erase1" /></div>
       <div class="erasemore">
@@ -209,12 +209,27 @@
       const mathdatadisplay = document.querySelector(".mathdata");
       const egalebtn = document.querySelector(".egale");
       var endreponse = "";
+      var dotclicked = false;
+      var dotdone = false;
       const clearbtn = document.querySelector(".erasemore");
       const erasebtn = document.querySelector(".erase1");
+      const dot = document.querySelector(".dot");
 
 
       clearbtn.addEventListener("click", clearDisp);
       erasebtn.addEventListener("click", sliceOne);
+
+      dot.addEventListener("click", function() {
+                    if ((dotclicked == false) && (!signclicked)) {
+                      dotclicked = true;
+                      mathdatadisplay.insertAdjacentHTML("beforeend", '.'+ " ")
+                    }
+                    else if (dotclicked == true) { alert ('already clicked the dot there bruh') ;}
+                    
+                    else { alert('ERROR');}
+
+
+      } )
 
       egalebtn.addEventListener("click", function() {
         if (!signclicked) {
@@ -267,10 +282,19 @@
       );
 
       function createEq(e) {
-        if (!signclicked) {
+        if (!signclicked && (!dotclicked)) {
           objClicked.firstNumber = Number(objClicked.firstNumber) + e;
           console.log(objClicked.firstNumber);
-        } else if (isNaN(e)) {
+        } 
+        else if ((!signclicked) && (dotclicked) && (!dotdone)) {
+          
+          objClicked.firstNumber = objClicked.firstNumber + '.' + e;
+          dotdone = true;
+        }
+        else if ((!signclicked) && (dotclicked = true) && (dotdone)) {
+          objClicked.firstNumber = objClicked.firstNumber + e;
+        }
+        else if (isNaN(e)) {
           addSign(e);
         } else {
           objClicked.secondNumber = Number(objClicked.secondNumber) + e;
