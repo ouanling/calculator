@@ -169,7 +169,7 @@
       <div class="nb9"><input type="button" value="9" class="btns disp" /></div>
       <div class="dot"><input type="button" value="." class="btns disp" /></div>
 
-      <div class="erase1"><input type="button" value="del" class="btns" /></div>
+      <div class="erase1"><input type="button" value="del" class="btns erase1" /></div>
       <div class="erasemore">
         <input type="button" value="clear" class="btns erasemore" />
       </div>
@@ -210,8 +210,11 @@
       const egalebtn = document.querySelector(".egale");
       var endreponse = "";
       const clearbtn = document.querySelector(".erasemore");
+      const erasebtn = document.querySelector(".erase1");
+
 
       clearbtn.addEventListener("click", clearDisp);
+      erasebtn.addEventListener("click", sliceOne);
 
       egalebtn.addEventListener("click", function() {
         if (!signclicked) {
@@ -302,14 +305,37 @@
       }
 
       function clearDisp() {
-        mathdatadisplay.innerHTML = ''
-        repDisplay.innerHTML = '';
-        objClicked.sign = '';
-        objClicked.firstNumber = '';
-        objClicked.secondNumber = '';
+        mathdatadisplay.innerHTML = "";
+        repDisplay.innerHTML = "";
+        objClicked.sign = "";
+        objClicked.firstNumber = "";
+        objClicked.secondNumber = "";
         audeux = false;
         signclicked = false;
-        endreponse = '';
+        endreponse = "";
+      }
+      function sliceOne() {
+        if (signclicked && objClicked.secondNumber <= 0) {
+          objClicked.sign = "";
+          signclicked = false;
+          audeux = false;
+          let newdisp = mathdatadisplay.innerHTML.slice(0, -2);
+          mathdatadisplay.innerHTML = newdisp;}
+
+          else if ((!audeux) && (!signclicked)) {
+            let newnb = objClicked.firstNumber.slice(0, -1);
+            objClicked.firstNumber = newnb;
+            let newdisp = mathdatadisplay.innerHTML.slice(0, -2);
+          mathdatadisplay.innerHTML = newdisp;}
+
+          else if ((audeux) && objClicked.secondNumber > 0) {
+            let newnb =  objClicked.secondNumber.slice(0, -1)
+            objClicked.secondNumber = newnb;
+            let newdisp = mathdatadisplay.innerHTML.slice(0, -2);
+          mathdatadisplay.innerHTML = newdisp;}
+
+
+        
       }
     </script>
   </body>
